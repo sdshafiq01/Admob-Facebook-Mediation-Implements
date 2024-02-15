@@ -5,4 +5,4 @@ before_install:
   - ./scripts/prepareJitpackEnvironment.sh
 install:
   - FILE="-Dfile=AdmobFacebookMediation-release.aar"
-  - mvn install:install-file $FILE -DgroupId=com.github.sdshafiq01 -DartifactId=AdmobFacebookMediation -Dversion=1.1.01 -Dpackaging=aar -DgeneratePom=true
+  - mvn install:install-file $FILE -DgroupId=com.github.sdshafiq01 -DartifactId=AdmobFacebookMediation -Dversion=1.1.02 -Dpackaging=aar -DgeneratePom=true

@@ -3,6 +3,8 @@ public class Constant {
 
     public static final String ADS_SELECT_ADMOB = "Admob";
     public static final String ADS_SELECT_FACEBOOK = "Facebook";
+    public static final String SMALL_NATIVE_ADS = "small";
+    public static final String BIG_NATIVE_ADS = "big";
 
     public static final String  ADMOB_TEST_INTERSTITIAL_ID = "ca-app-pub-3940256099942544/2247696110";
     public static final String ADMOB_TEST_REWARDS_ID = "ca-app-pub-3940256099942544/2247696110";

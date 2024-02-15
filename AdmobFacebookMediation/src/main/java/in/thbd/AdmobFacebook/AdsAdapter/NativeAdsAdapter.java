@@ -42,8 +42,20 @@ public class NativeAdsAdapter {
     private static NativeAdLayout adView;
     public static int counter = 0;
 
+
+
+    /**
+     * @param activity Activity can't be null
+     * @param adsLayout Relative Layout Preferred here
+     * @param selectAdsBackup Select your Backup ads when primary ads not be loaded then load your backup ads, if you set another string Backup Ads will not worked.
+     * @param idNative Primary Admob Native Ads ID place here
+     * @param fbNativeId Backup Facebook Native Ads ID Place Here. if you select small then use *** Fb Native Banner ID ****
+     * @param size big or small size you use here.
+     *             Constant.SMALL_NATIVE_ADS
+     *             Constant.BIG_NATIVE_ADS
+     **/
     // ads size = big, small
-    public static void loadNativeAdmob(Activity activity, RelativeLayout adLayout, String selectAdsBackup, String idNative,
+    public static void loadNativeAdmob(Activity activity, RelativeLayout adsLayout, String selectAdsBackup, String idNative,
                                        String fbNativeId, String size) {
 
 //                LayoutInflater layoutInflater = (LayoutInflater)
@@ -62,10 +74,10 @@ public class NativeAdsAdapter {
                         TemplateView view = null;
                         if (size.contains("big")){
                             view = (TemplateView) LayoutInflater.from(activity)
-                                    .inflate(R.layout.ads_native_med_ads_layout, adLayout, false);
+                                    .inflate(R.layout.ads_native_med_ads_layout, adsLayout, false);
                         }else{
                             view = (TemplateView) LayoutInflater.from(activity)
-                                    .inflate(R.layout.ads_native_ads_layout, adLayout, false);
+                                    .inflate(R.layout.ads_native_ads_layout, adsLayout, false);
                         }
 
 
@@ -75,9 +87,9 @@ public class NativeAdsAdapter {
 //                            TemplateView template = findViewById(R.id.my_template);
                         view.setStyles(styles);
                         view.setNativeAd(nativeAd);
-                        adLayout.setVisibility(View.VISIBLE);
-                        adLayout.removeAllViews();
-                        adLayout.addView(view);
+                        adsLayout.setVisibility(View.VISIBLE);
+                        adsLayout.removeAllViews();
+                        adsLayout.addView(view);
                     }
                 }
                 ).withAdListener(new AdListener() {
@@ -88,10 +100,12 @@ public class NativeAdsAdapter {
                         if (Constant.ADS_SELECT_FACEBOOK.equals(selectAdsBackup)) {
 
                             if (size.contains("big")){
-                                loadBigFacebookNative(activity,fbNativeId,adLayout);
+                                NativeAdsAdapter.loadBigFacebookNative(activity, adsLayout, Constant.ADS_SELECT_ADMOB, fbNativeId, idNative);
                             }else{
-                                loadSmallFacebookNative(activity,adLayout,fbNativeId);
+                                NativeAdsAdapter.loadSmallFacebookNative(activity, adsLayout, Constant.ADS_SELECT_ADMOB, fbNativeId, idNative);
                             }
+
+
 
 
                         }
@@ -102,13 +116,21 @@ public class NativeAdsAdapter {
 
         adLoader.loadAd(new AdRequest.Builder().build());
 
-//        adLoader.loadAd(new AdRequest.Builder().addKeyword(Hpk1).addKeyword(Hpk2).addKeyword(Hpk3).addKeyword(Hpk4).build());
-
 
     }
 
-    private static void loadBigFacebookNative(Activity activity,String idNativeBackup,RelativeLayout adLayout) {
-        nativeAdFb = new com.facebook.ads.NativeAd(activity, idNativeBackup);
+
+
+
+    /**
+     * @param activity Activity can't be null
+     * @param adsLayout Relative Layout Preferred here
+     * @param selectAdsBackup Select your Backup ads when primary ads not be loaded then load your backup ads, if you set another string Backup Ads will not worked.
+     * @param idNative Primary Native Ads ID place here
+     * @param admobNativeId Backup Native Ads ID Place Here
+     **/
+    public static void loadBigFacebookNative(Activity activity, RelativeLayout adsLayout, String selectAdsBackup, String idNative, String admobNativeId) {
+        nativeAdFb = new com.facebook.ads.NativeAd(activity, idNative);
 
         NativeAdListener nativeAdListener = new NativeAdListener() {
             @Override
@@ -121,14 +143,18 @@ public class NativeAdsAdapter {
             public void onError(Ad ad, AdError adError) {
                 // Native ad failed to load
                 Log.e(TAG, "Native ad failed to load: " + adError.getErrorMessage());
+                if (Constant.ADS_SELECT_ADMOB.equalsIgnoreCase(selectAdsBackup)){
+                    loadNativeAdmob(activity, adsLayout, Constant.ADS_SELECT_FACEBOOK, admobNativeId, idNative,"big");
+                }
+
             }
 
             @Override
             public void onAdLoaded(Ad ad) {
                 // Native ad is loaded and ready to be displayed
                 Log.d(TAG, "Native ad is loaded and ready to be displayed!");
-                adLayout.setVisibility(View.VISIBLE);
-                inflateAd(activity,nativeAdFb,adLayout);
+                adsLayout.setVisibility(View.VISIBLE);
+                inflateAd(activity,nativeAdFb,adsLayout);
             }
 
             @Override
@@ -151,9 +177,17 @@ public class NativeAdsAdapter {
                         .build());
     }
 
-    public static void loadSmallFacebookNative(Activity activity, RelativeLayout adLayout,String fbAdsID ) {
 
-        nativeBannerAd = new NativeBannerAd(activity, fbAdsID);
+    /**
+     * @param activity Activity can't be null
+     * @param adsLayout Relative Layout Preferred here
+     * @param selectAdsBackup Select your Backup ads when primary ads not be loaded then load your backup ads, if you set another string Backup Ads will not worked.
+     * @param idNative Primary Native Banner Ads ID place here
+     * @param admobNativeId Backup Native Ads ID Place Here
+     **/
+    public static void loadSmallFacebookNative(Activity activity, RelativeLayout adsLayout, String selectAdsBackup, String idNative, String admobNativeId) {
+
+        nativeBannerAd = new NativeBannerAd(activity, idNative);
         NativeAdListener nativeAdListener = new NativeAdListener() {
             @Override
             public void onMediaDownloaded(Ad ad) {
@@ -162,13 +196,15 @@ public class NativeAdsAdapter {
 
             @Override
             public void onError(Ad ad, AdError adError) {
-
+                if (Constant.ADS_SELECT_ADMOB.equalsIgnoreCase(selectAdsBackup)){
+                    loadNativeAdmob(activity, adsLayout, Constant.ADS_SELECT_FACEBOOK, admobNativeId, idNative,"small");
+                }
             }
 
             @Override
             public void onAdLoaded(Ad ad) {
-                adLayout.setVisibility(View.VISIBLE);
-                inflateSmallAd(activity,nativeBannerAd,adLayout);
+                adsLayout.setVisibility(View.VISIBLE);
+                inflateSmallAd(activity,nativeBannerAd,adsLayout);
             }
 
             @Override

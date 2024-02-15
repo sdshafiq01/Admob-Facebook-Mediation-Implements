@@ -87,7 +87,7 @@ public class InterstitialAdsAdapter {
 
     }
 
-    public static void showInterstitial(Activity activity, String selectAdsBackup, String admobAdsID, String fbAdsID) {
+    public static void showInterstitial(Activity activity) {
 
 
         if (mInterstitialAd != null) {
@@ -95,17 +95,8 @@ public class InterstitialAdsAdapter {
 
         } else {
 
-            switch (selectAdsBackup) {
-
-                case Constant.ADS_SELECT_FACEBOOK:
-                    if (interstitialAdFb != null && interstitialAdFb.isAdLoaded()) {
-                        interstitialAdFb.show();
-                    } else {
-                        assert interstitialAdFb != null;
-                        interstitialAdFb.loadAd();
-                    }
-
-                    break;
+            if (interstitialAdFb != null && interstitialAdFb.isAdLoaded()) {
+                interstitialAdFb.show();
             }
 
         }

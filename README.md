@@ -43,29 +43,29 @@ Recent Updated Version: [![](https://jitpack.io/v/sdshafiq01/Admob-Facebook-Medi
         // init banner ads layout
         RelativeLayout adsLayout = findViewById(R.id.adsLayout);
 
-Show Admob banner ads in the layout
+# Show Admob banner ads in the layout
 	
  	//if Admob ads are not loaded then automatically load Facebook banner ads
         BannerAdsAdapter.bannerAdmob(act, adsLayout, Constant.ADS_SELECT_FACEBOOK, Constant.ADMOB_TEST_BANNER_ID, Constant.FB_TEST_BANNER_FACEBOOK_ID);
 
-Show Facebook banner ads in the layout
+# Show Facebook banner ads in the layout
 
 	//if Facebook ads are not loaded then automatically load Admob banner ads
         BannerAdsAdapter.bannerFacebook(act, adsLayout, Constant.ADS_SELECT_ADMOB, Constant.ADMOB_TEST_BANNER_ID, Constant.FB_TEST_BANNER_FACEBOOK_ID);
 
-/////////////////////////////////
 
-Load Admob interstitial ads
+
+# Load Admob interstitial ads
 		
   	//If Admob ads are not loaded then automatically load Facebook interstitial ads
  	 InterstitialAdsAdapter.loadInterstitialAdmob(act, Constant.ADS_SELECT_FACEBOOK, Constant.ADMOB_TEST_INTERSTITIAL_ID, Constant.FB_TEST_INTERSTITIAL_ID);
         
-Load Facebook interstitial ads
+# Load Facebook interstitial ads
 
 	//If Facebook ads are not loaded then automatically load Admob interstitial ads
 	InterstitialAdsAdapter.loadInterstitialFacebook(act, Constant.ADS_SELECT_ADMOB, Constant.FB_TEST_INTERSTITIAL_ID, Constant.ADMOB_TEST_INTERSTITIAL_ID);
        
-Show Admob/Facebook interstitial ads
+# Show Admob/Facebook interstitial ads
 
 	// Check whether Interstitial Ads is loaded or not. if any one ad loaded then it shows automatically
         if(InterstitialAdsAdapter.isAdsLoaded()){
@@ -73,22 +73,20 @@ Show Admob/Facebook interstitial ads
 	    
         }
 	
-//////////////////////////////////////////
 
-
-Load Admob Rewards ads
+# Load Admob Rewards ads
 		
   	//If Admob ads are not loaded then automatically load Facebook Rewards ads
  	  RewardsAdsAdapter.loadRewardsAdmob(act, Constant.ADS_SELECT_FACEBOOK, Constant.ADMOB_TEST_REWARDS_ID, Constant.FB_TEST_REWARDS_ID);
        
 
         
-Load Facebook Rewards ads
+# Load Facebook Rewards ads
 
 	//If Facebook ads are not loaded then automatically load Admob Rewards ads
 	 RewardsAdsAdapter.loadRewardsFacebook(act, Constant.ADS_SELECT_ADMOB, Constant.FB_TEST_REWARDS_ID, Constant.ADMOB_TEST_REWARDS_ID);
        
-Show Admob/Facebook Rewards ads
+# Show Admob/Facebook Rewards ads
 
 	// Check whether Rewards Ads is loaded or not. if any one ad loaded then it shows automatically
        
@@ -101,21 +99,32 @@ Show Admob/Facebook Rewards ads
 
 
 
-Load Admob/Facebook Native Ads With NativeAdsAdapter
+# Load Admob/Facebook Native Ads With NativeAdsAdapter
 
+## Admob Big Native Ads (Constant.BIG_NATIVE_ADS)<br>
+![alt text](https://github.com/sdshafiq01/Admob-Facebook-Mediation-Implements/blob/main/images/admob-big.png?raw=true)
 
-    	// load Admob big  or small Size Native Ads, if not loaded Admob ads then auto load Facebook big or small size native ads.
+## Admob Small Native Ads (Constant.SMALL_NATIVE_ADS)<br>
+![alt text](https://github.com/sdshafiq01/Admob-Facebook-Mediation-Implements/blob/main/images/admob-smal.png?raw=true)
+    	
+     	// load Admob big  or small Size Native Ads, if not loaded Admob ads then auto load Facebook big or small size native ads.
         NativeAdsAdapter.loadNativeAdmob(act, adsLayout, Constant.ADS_SELECT_FACEBOOK, Constant.ADMOB_TEST_NATIVE_ID, Constant.FB_TEST_NATIVE_ADS_ID, Constant.BIG_NATIVE_ADS);
 
-	![alt text](https://github.com/[sdshafiq01]/[Admob-Facebook-Mediation-Implements]/blob/[branch]/image.jpg?raw=true)
 
-	// load Facebook big Size Native Ads, if not loaded Admob ads then auto load Admob big-size native ads.
+
+## Admob Big Native Ads<br>
+![alt text](https://github.com/sdshafiq01/Admob-Facebook-Mediation-Implements/blob/main/images/fb-big.png?raw=true)
+
+## Admob Small Native Ads<br>
+![alt text](https://github.com/sdshafiq01/Admob-Facebook-Mediation-Implements/blob/main/images/fb-small.png?raw=true)
+
+	// load Facebook Big Size Native Ads, if not loaded Admob ads then auto load Admob big-size native ads.
         NativeAdsAdapter.loadBigFacebookNative(act, adsLayout, Constant.ADS_SELECT_ADMOB, Constant.FB_TEST_NATIVE_ADS_ID, Constant.ADMOB_TEST_NATIVE_ID);
 
-	// load Facebook small Size Native Ads, if not loaded Admob ads then auto load Admob small-size native ads.
+	// load Facebook Small Size Native Ads, if not loaded Admob ads then auto load Admob small-size native ads.
         NativeAdsAdapter.loadSmallFacebookNative(act, adsLayout, Constant.ADS_SELECT_ADMOB, Constant.FB_TEST_NATIVE_BANNER_ID, Constant.ADMOB_TEST_NATIVE_ID);
 
-Support:
+# Support:
 For feature requests, improvements, questions, or any other integration issues using Admob Facebook Mediation Library, 
 then contact us via email: 
 
